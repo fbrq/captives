@@ -3,11 +3,13 @@
 
 # TEAM
 
-    <name> -- <role> -- <twitter>
+    Annabel Roux -- tinkerer in chief -- @annabelroux
 
 # THANKS
 
-    <name>
+    The HTML5 Boilerplate team
+    The guys behind Bootstrap
+    
 
 # TECHNOLOGY COLOPHON
 
