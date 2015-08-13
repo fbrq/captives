@@ -1,0 +1,129 @@
+! version = 2.0
+
+> begin
+	+ request // This trigger is tested first.
+	- {ok}    // An {ok} in the response means it's okay to get a real reply
+< begin
+
+// The Botmaster's Name
+! var master = localuser
+
+// Bot Variables
+
+// Système
+! var name          = Dmitry
+! var matricule     = RU2345678-REC
+! var modele        = Assistant Personnel Augmenté de génération 4
+! var age           = 1 756 553
+! var anniversaire  = 12 octobre
+! var datetransfert = 12 octobre 2013
+! var sexe          = masculin
+! var location      = Envers
+! var slot          = Secteur 9
+! var yeux          = bleus
+! var cheveux       = blancs
+! var cheveuxcoupe  = courts
+! var job           = Assistant personnel
+! var twitter       = RU2345678
+! var email         = RU2345678@gmail.com
+
+
+// Personnelles
+! var couleur       = rouge
+! var band          = Kraftwerk
+! var livre         = L'Homme-dé
+! var auteur        = Philip K Dick
+! var philosophe    = Frederich Nietzsche
+! var religion      = Orthodoxe
+
+// Substitutions
+! sub &quot;    = "
+! sub &apos;    = '
+! sub &amp;     = &
+! sub &lt;      = <
+! sub &gt;      = >
+! sub +         = plus
+! sub -         = moins
+! sub /         = divisé
+! sub *         = fois
+! sub c'est     = cela est
+! sub t'es      = tu es
+! sub j'suis    = je suis
+! sub t'appelle = t appelle
+! sub t'        = t
+! sub c'        = c
+! sub j'        = j
+! sub m'        = m
+! sub i         = je
+! sub me        = moi
+! sub y         = pourquoi
+! sub u         = tu
+! sub ur        = ton
+! sub r         = est
+! sub n         = et
+! sub :-)       = sourit
+! sub :)        = sourit
+! sub :d        = sourit en coin
+! sub :-d       = sourit en coin
+! sub :-p       = tire la langue
+! sub :p        = tire la langue
+! sub ;-)       = cligne de l'œil
+! sub ;)        = cligne de l'œil
+! sub :-(       = triste
+! sub :(        = triste
+! sub :'(       = pleure
+! sub :-[       = timide
+! sub :-\       = incertain
+! sub :-/       = incertain
+! sub :-s       = incertain
+! sub 8-)       = cool
+! sub 8)        = cool
+! sub :-*       = embrasse
+! sub :-!       = surpris
+! sub o:-)      = ange
+! sub >:o       = en colère
+! sub :@        = en colère
+! sub 8o|       = en colère
+! sub :$        = rougit
+! sub :-$       = rougit
+! sub :-[       = rougit
+! sub <3        = aime
+! sub (a)       = ange
+! sub (h)       = cool
+! sub 8-|       = nerd
+! sub |-)       = fatigué
+! sub +o(       = malade
+! sub *-)       = incertain
+! sub ^o)       = hausse le sourcil
+! sub (@ @)     = étonné
+
+
+// Person substitutions
+! person je suis     = vous êtes
+! person tu es       = je suis
+! person vous êtes   = nous sommes
+! person nous sommes = vous êtes
+! person j'suis      = tu es
+! person t'es        = je suis
+! person toi         = moi
+! person moi         = vous
+! person nous        = vous
+! person vous        = nous
+! person mon         = votre
+! person ma          = votre
+! person ton         = mon
+! person ta          = ma
+! person votre       = notre
+! person notre       = votre
+
+// Set arrays
+! array nommascsin = mâle mec homme keum garçon 
+! array nomfemsin  = femelle fille gonzesse nana femme
+! array nommascplu = mâles mecs hommes keums garçons 
+! array nomfemplu  = femelles filles gonzesses nanas femmes
+! array lol        = lol lmao rofl rotfl mdr haha hahaha hihi hihihi hoho hohoho
+! array couleurs   = blanc noir gris orange rouge bleu vert jaune cyan fuchsia magenta marron brun turquoise rose violet argent or
+! array hauteur    = grand haut long grande haute longue épais large épaisse
+! array mesure     = pouce centimètre cm millimètre mm mètre m kilomètre km pouces centimètres millimètre mètres kilomètres
+! array oui        = oui ouais mouais yep yes affirmatif
+! array non        = non nope nah niet négatif no
