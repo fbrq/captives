@@ -1266,14 +1266,15 @@ inherit_utils = require("./inheritance");
 JSObjectHandler = require("./lang/javascript");
 
 RiveScript = (function() {
-  function RiveScript(opts) {
-    if (opts == null) {
+  function RiveScript() {
+    var opts;
+    if (typeof opts === "undefined" || opts === null) {
       opts = {};
     }
     this._debug = opts.debug ? opts.debug : false;
     this._strict = opts.strict ? opts.strict : true;
     this._depth = opts.depth ? parseInt(opts.depth) : 50;
-    this._utf8 = opts.utf8 ? opts.utf8 : false;
+    this._utf8 = true;
     this._onDebug = opts.onDebug ? opts.onDebug : null;
     this._node = {};
     this._runtime = this.runtime();

@@ -1,9 +1,97 @@
 ! version = 2.0
 
 > begin
-	+ request // This trigger is tested first.
-	- {ok}    // An {ok} in the response means it's okay to get a real reply
+
+// Si nouvel utilisateur et nom inconnu, définit topic = nouvel_utilisateur et continue.
++ request
+* <get name> == undefined => {topic=nouvel_utilisateur}{ok}
+- {ok}
+
 < begin
+
+> topic nouvel_utilisateur
+
+// ID utilisateur (prénom ou pseudo)
+
++ *
+- Bonjour! Je suis <bot name>! Je suis un assistant personnel Digipal de quatrième génération.\s
+^ Puis savoir comment vous appeler ? {topic=nom_demande}
+
+< topic
+
+> topic nom_demande
+
++ (@oui)
+- Mais encore ?
+
++ (@non)
+- Très bien, je comprends. 
+^ Dois-je vous appeler Monsieur ou Madame ?{topic=nom_refus} 
+
+
+// utilisateur entre un nombre 
+
++ #
+- Vous n'êtes pas un numéro !  
+- Je préfèrerai vous appeler par votre prénom plutôt que par votre matricule.
+
+
+// utilisateur entre plusieurs mots
+
++ *
+% mais encore ?
+- Un prénom me suffit. Vous m'aidez ?
+
++ *
+- C'est original <star>. Enchanté, que puis-je faire pour vous ?{topic=service}
+- C'est vous qui voyez. Que puis-je faire pour vous <star> ?{topic=service}
+- Un prénom me suffirait
+
+// utilisateur entre un mot
+
++ _
+* <bot genre> == masculin => Très bien. Enchanté, <get name> ! Que puis-faire pour vous <get name> aujourd'hui ?{topic=service}
+* <bot genre> == feminin => Très bien. Enchantée, <get name> ! Que puis-faire pour vous <get name> aujourd'hui ?{topic=service}
+- <set name=<formal>>Très bien. Merci <get name> ! Que puis-faire pour vous <get name> aujourd'hui ?{topic=service}
+
+< topic
+
+
+> topic nom_refus
+
+// ID utilisateur (si refus > Monsieur / Madame )
+
+
++ [*] Monsieur [*]
+- <set name=Monsieur><set genre=masculin> Parfait ! Que puis-faire pour vous aujourd'hui, <get name> ?{topic=service}
+
++ [*] Madame [*]
+- <set name=Madame><set genre=feminin> Parfait ! Que puis-faire pour vous aujourd'hui, <get name> ?{topic=service}
+
++ [*] Mademoiselle [*]
+- <set name=Mademoiselle><set genre=feminin> Ah, je croyais que ça n'avait plus cours, passons... Que puis-faire pour vous aujourd'hui, <get name> ?{topic=service}
+
++ ([*] Maman [*]|[*] Maîtresse [*])
+- <set name=Madame><set genre=feminin>... ...
+^ Ça me gêne, voyez-vous. 
+^ Si cela ne vous dérange pas, je vais en rester à <get name> ?{topic=service}
+
++ ([*] Papa [*]|[*] Maître [*]|[*] Dieu [*])
+- <set name=Monsieur><set genre=masculin>... ...
+^ Ça me gêne, voyez-vous. 
+^ Si cela ne vous dérange pas, je vais en rester à <get name> ?{topic=service}
+
++ ([*] Altesse [*]|[*] Eminence [*]|[*] Grandeur [*]|[*] Seigneur [*])
+- :- ) 
+^ Parfait, <set name=<botstar>> ! Que puis-je faire pour vous aujourd'hui ?{topic=service}
+
++ *
+- C'est original <star>. Enchanté, que puis-je faire pour vous ?{topic=service}
+- C'est vous qui voyez. Que puis-je faire pour vous <star> ?{topic=service}
+
+< topic
+
+// VARIABLES
 
 // The Botmaster's Name
 ! var master = localuser
@@ -17,7 +105,7 @@
 ! var age           = 1 756 553
 ! var anniversaire  = 12 octobre
 ! var datetransfert = 12 octobre 2013
-! var sexe          = masculin
+! var genre          = trans
 ! var location      = Envers
 ! var slot          = Secteur 9
 ! var yeux          = bleus
@@ -38,7 +126,7 @@
 
 // Substitutions
 ! sub &quot;    = "
-! sub &apos;    = '
+// ! sub &apos;    = '
 ! sub &amp;     = &
 ! sub &lt;      = <
 ! sub &gt;      = >
@@ -46,14 +134,10 @@
 ! sub -         = moins
 ! sub /         = divisé
 ! sub *         = fois
+! sub t'        = t
 ! sub c'est     = cela est
 ! sub t'es      = tu es
 ! sub j'suis    = je suis
-! sub t'appelle = t appelle
-! sub t'        = t
-! sub c'        = c
-! sub j'        = j
-! sub m'        = m
 ! sub i         = je
 ! sub me        = moi
 ! sub y         = pourquoi
